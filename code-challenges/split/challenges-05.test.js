@@ -78,9 +78,14 @@ const gruffaloCrumble = {
 
 const listFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+  for (let ingredient of recipe['ingredients']) {
+    let line = ingredient.slice(ingredient.indexOf(' ') + 1);
+    line = line.slice(line.indexOf(' ') + 1);
+    result.push(line);
+  }
   return result;
-}
+};
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -92,9 +97,11 @@ You may also use other string or array methods.
 
 const splitFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+  for (let ingredient of recipe['ingredients']) {
+    result.push(ingredient.split(' ').slice(2).join(' '));
+  }
   return result;
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -108,7 +115,12 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 
 const stepActions = (recipe) => {
   let result = [];
-  // Solution code here...
+  let steps = recipe.steps;
+  steps.forEach((e)=>{
+    let split = e.split(' ');
+    let getAction = split.slice(0,1);
+    result.push(getAction.join(' '));
+  })
   return result;
 }
 
@@ -126,7 +138,13 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const removeEvenValues = (arr) => {
-  // Solution code here...
+  for(let i=arr.length; i>=0; i--){
+    if(arr[i]%2 === 0){
+     arr.splice(i,1)
+   }
+}; 
+return arr;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -145,9 +163,14 @@ removeLastCharacters('Gregor', 9) returns ''
 ------------------------------------------------------------------------------------------------ */
 
 const removeLastCharacters = (str, numberOfCharacters) => {
-  // Solution code here...
+  if (numberOfCharacters < 0) {
+    return str;
+  }
+  if (numberOfCharacters > str.length) {
+    return '';
+  }
+  return (str.slice(0, str.length - numberOfCharacters));
 };
-
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
